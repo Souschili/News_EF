@@ -30,6 +30,7 @@ namespace News_EF
                 await context.Response.WriteAsync("Hello World!");
             });
         }
+        //this is test for branch EF DB
         
     }
 }
