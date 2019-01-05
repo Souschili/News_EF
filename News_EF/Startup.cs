@@ -30,6 +30,6 @@ namespace News_EF
                 await context.Response.WriteAsync("Hello World!");
             });
         }
-        const AccessViolationException= 0;
+        
     }
 }
