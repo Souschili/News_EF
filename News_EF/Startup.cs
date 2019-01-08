@@ -15,7 +15,7 @@ namespace News_EF
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<INewsRepository, FakeNewsRepository>();
+            
             services.AddMvc();
         }
 

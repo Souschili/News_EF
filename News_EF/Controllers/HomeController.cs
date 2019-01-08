@@ -10,17 +10,12 @@ namespace News_EF.Controllers
     
     public class HomeController : Controller
     {
-        private INewsRepository _repository;
-
-        public HomeController(INewsRepository repo)
-        {
-            _repository = repo;
-        }
+       
 
         [Route("")]
         public IActionResult Index()
         {
-            return View(_repository.GetNews());
+            return View();
         }
     }
 }
