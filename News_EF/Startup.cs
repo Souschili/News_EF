@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using News_EF.Services;
 
 namespace News_EF
 {
@@ -14,6 +15,7 @@ namespace News_EF
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<INewsRepository, FakeNewsRepository>();
             services.AddMvc();
         }
 
