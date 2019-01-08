@@ -10,7 +10,7 @@ namespace News_EF.Controllers
     
     public class HomeController : Controller
     {
-       
+      
 
         [Route("")]
         public IActionResult Index()
