@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body, h3 {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: darkgray;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: whitesmoke
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            border: 1px black solid;
+            padding: 15px 25px;
+        }
+
+        .news-box {
+            border: 5px solid black;
+            max-height: 33%;
+            padding: 0 5px;
+            display: flex;
+            flex-direction: column;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        .news {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li.news-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px blue solid;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        div.add-news {
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="menu">
+        <div>
+            <h1>Всегалактические Новости и события</h1>
+        </div>
+    </nav>
+    <main>
+        <div class="news-box">
+            <ul class="news">
+              @RenderBody()
+            </ul>
+        </div>
+        <div class="add-news">
+            <h2>Добавить новость</h2>
+            <form>
+                <p>
+                    Author<br>
+                    <input type="text" name="Author" required>
+                </p>
+                <p>
+                    Title<br>
+                    <input type="text" name="Title" required>
+                </p>
+                <p>
+                    News Text <br>
+                    <textarea name="Text" cols="80" rows="10"></textarea>
+                </p>
+
+                <p>
+                    <input type="submit" value="Отправить">
+
+                </p>
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,19 +1,5 @@
-﻿@using News_EF.Models
-@model IEnumerable<News>
-@{
-    ViewData["Title"] = "Index";
+﻿@{ 
+    Layout = "~/Views/_Layout.cshtml";
 }
 
-<h2>This is Main Page</h2>
-@{ 
-    foreach (var item in Model)
-    {
-        <h2>@item.Author</h2>
-        <h1>@item.Title</h1>
-        <p>@item.Text</p>
-        <p>@item.Date.ToShortDateString()</p>
-
-
-    }
-}
-
+<h1>Пока новостей нет</h1>
