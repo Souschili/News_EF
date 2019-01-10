@@ -1,16 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using News_EF.Services;
+using System.Threading.Tasks;
 
 namespace News_EF.Controllers
 {
 
     public class HomeController : Controller
     {
-      
+        private INewsService servise;
+
+        public HomeController(INewsService serv)
+        {
+            servise = serv;
+        }
 
         [Route("")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await servise.GetNewsAsync());
         }
     }
 }

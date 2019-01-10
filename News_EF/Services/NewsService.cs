@@ -27,9 +27,10 @@ namespace News_EF.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<News>> GetNewsAsync()
+        public  async Task<List<News>> GetNewsAsync()
         {
-            return await ndb.News.ToListAsync();
+            var rezult = await ndb.News.ToListAsync();
+            return rezult; 
         }
 
         public News ShowNews()

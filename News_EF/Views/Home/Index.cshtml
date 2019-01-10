@@ -1,5 +1,11 @@
-﻿@{ 
+﻿@using News_EF.Models;
+@model List<News>;
+
+
+@{
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<h1>Пока новостей нет</h1>
+@{ 
+    <h1>@Model.Count()</h1>
+}
