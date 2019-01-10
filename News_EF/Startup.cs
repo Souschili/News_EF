@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using News_EF.Data;
+using News_EF.Services;
 
 namespace News_EF
 {
@@ -23,6 +24,7 @@ namespace News_EF
             //получаем строку подключения
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<NewsContext>(options => options.UseSqlServer(connection));
+            services.AddTransient<INewsService, NewsService>();
             services.AddMvc();
         }
 
