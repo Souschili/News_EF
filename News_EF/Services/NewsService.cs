@@ -29,8 +29,8 @@ namespace News_EF.Services
 
         public  async Task<List<News>> GetNewsAsync()
         {
-            var rezult = await ndb.News.ToListAsync();
-            return rezult; 
+             
+            return await ndb.News.ToListAsync();
         }
 
         public News ShowNews()
