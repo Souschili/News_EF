@@ -38,7 +38,7 @@ namespace News_EF
             app.UseMvc();
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("У нас какая то глобальная проблема !!");
+                await context.Response.WriteAsync("We have problem!!!");
             });
         }
     }

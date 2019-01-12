@@ -6,6 +6,29 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-@{ 
-    <h1>@Model.Count() + @Model.GetType()</h1>
+@{
+    if (Model.Count() == 0)
+    {
+        //TODO добавить картинку смайл грустный
+        <li class="no-news-item">
+            <h1>Нет новостей :(</h1>
+        </li>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <li class="news-item">
+                <div class="news-title">
+                   <a href="~/Home/Read/@item.Id">
+                       <h2 class="news">@item.Title</h2>
+                   </a> 
+                </div>
+                <div class="news-info">
+                    <p>@item.Author</p>
+                    <p>@item.Date.ToShortDateString()</p>
+                </div>
+            </li>
+        }
+    }
 }
