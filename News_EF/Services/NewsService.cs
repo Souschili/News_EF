@@ -27,16 +27,26 @@ namespace News_EF.Services
         {
             throw new NotImplementedException();
         }
-
+       /// <summary>
+       /// Получить список всех новостей
+       /// </summary>
+       /// <returns></returns>
         public  async Task<List<News>> GetNewsAsync()
         {
              
             return await ndb.News.ToListAsync();
         }
 
-        public News ShowNews()
+        /// <summary>
+        /// Получить новость для чтения по айди
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public News ShowNews(int id)
         {
-            throw new NotImplementedException();
+            var read_news = ndb.News.FirstOrDefault(x => x.Id == id);
+            return read_news;
+
         }
     }
 }

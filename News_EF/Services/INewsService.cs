@@ -12,7 +12,7 @@ namespace News_EF.Services
         //реализует CRUD операции,неважно какая БД
         Task<List<News>> GetNewsAsync();
         void AddNews(News news);
-        News ShowNews();
+        News ShowNews(int id);
         void DeleteNews(int id);
     }
 }

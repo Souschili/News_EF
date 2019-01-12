@@ -33,9 +33,11 @@ namespace News_EF.Controllers
 
         [HttpGet]
         [Route("home/read/{id:int?}")]
-        public string Read(int id)
+        public IActionResult Read(int id)
         {
-            return $"{id}";
+            ViewBag.news = servise.ShowNews();
+            return View();
+                //$"{id}";
         }
     }
 }
