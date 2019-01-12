@@ -20,11 +20,12 @@
         {
             <li class="news-item">
                 <div class="news-title">
-                   <a href="~/Home/Read/@item.Id">
+                   <a href="~/Home/Read/?id=@item.Id">
                        <h2 class="news">@item.Title</h2>
                    </a> 
                 </div>
                 <div class="news-info">
+                    <p>@item.Id</p>
                     <p>@item.Author</p>
                     <p>@item.Date.ToShortDateString()</p>
                 </div>

@@ -19,7 +19,8 @@ namespace News_EF.Services
 
         public void AddNews(News news)
         {
-            throw new NotImplementedException();
+            ndb.Add(news);
+            ndb.SaveChanges();
         }
 
         public void DeleteNews(int id)
