@@ -16,10 +16,13 @@ namespace News_EF.Services
         {
             ndb = context;
         }
-
+        /// <summary>
+        /// Добавить новость в БД
+        /// </summary>
+        /// <param name="news"></param>
         public void AddNews(News news)
         {
-            ndb.Add(news);
+            ndb.News.Add(news);
             ndb.SaveChanges();
         }
 
@@ -46,7 +49,6 @@ namespace News_EF.Services
         {
             var read_news = ndb.News.FirstOrDefault(x => x.Id == id);
             return read_news;
-
         }
     }
 }

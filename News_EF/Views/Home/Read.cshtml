@@ -1,7 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Read";
-}
+﻿@using News_EF.Models
+@model News
 
 <h2>Читаем новость тут</h2>
+<h1>Author: @Model.Author</h1>
+<h1>Title: @Model.Title</h1>
+<h1>Text: @Model.Text</h1>
+<h1>Datetime: @Model.Date.ToShortDateString()</h1>
 
