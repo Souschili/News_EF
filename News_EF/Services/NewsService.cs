@@ -16,6 +16,13 @@ namespace News_EF.Services
         {
             ndb = context;
         }
+
+        public string AddComent(int NewsId, string auth,string text)
+        {
+           
+            return $"Something wrong";
+        }
+
         /// <summary>
         /// Добавить новость в БД
         /// </summary>
@@ -50,5 +57,9 @@ namespace News_EF.Services
             var read_news = ndb.News.FirstOrDefault(x => x.Id == id);
             return read_news;
         }
+
+      
+
+       
     }
 }

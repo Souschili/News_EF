@@ -1,9 +1,182 @@
 ﻿@using News_EF.Models
 @model News
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
 
-<h2>Читаем новость тут</h2>
-<h1>Author: @Model.Author</h1>
-<h1>Title: @Model.Title</h1>
-<h1>Text: @Model.Text</h1>
-<h1>Datetime: @Model.Date.ToShortDateString()</h1>
+        body, h1, p {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: darkgray;
+        }
 
+        .news-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .news-block > h1 {
+                align-self: center;
+            }
+
+        .news-title {
+            border: 1px solid red;
+            padding: 20px;
+            margin-bottom: 5px;
+            width: 50%;
+            align-self: center;
+            word-wrap: break-word;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text {
+            align-self: center;
+            display: flex;
+            width: 75%;
+            margin: 0 20px;
+            border: 1px solid black;
+            padding: 5px 20px;
+        }
+
+        .news-footer {
+            width: 75%;
+            border: 1px solid blue;
+            align-self: center;
+            justify-content: flex-end;
+            display: flex;
+        }
+
+            .news-footer > p {
+                padding: 0;
+                margin: 0 10px;
+            }
+
+        .coment-box {
+            align-self: center;
+            width: 50%;
+            height: 250px;
+            border: 1px solid green;
+        }
+
+        .coment {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li.coment-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px blue solid;
+            padding: 10px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .coment-text > p {
+            word-wrap: break-word;
+        }
+
+        .coment-info {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+            .coment-info > p {
+                margin-left: 10px;
+            }
+
+        div.add-coment {
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .coment-box {
+            border: 5px solid black;
+            max-height: 33%;
+            padding: 0 5px;
+            display: flex;
+            flex-direction: column;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="news-block">
+        <div class="news-title">
+            <h1>@Model.Title</h1>
+        </div>
+
+        <div class="text">
+           @Model.Text
+        </div>
+        <div class="news-footer">
+            <p>Автор:@Model.Author</p> <br> <p>Дата:@Model.Date.ToShortDateString()</p>
+        </div>
+        <div class="coment-box">
+            <ul class="coment">
+                @{
+                    if (Model.Coments.Count == 0)
+                    {
+                        <li class="no-coment-item">
+                            <h1>Нет коментариев :(</h1>
+                        </li>
+                    }
+                    else {
+                        foreach (var elem in Model.Coments)
+                        {
+                        <li class="coment-item">
+                            <div class="coment-text">
+                                <p>
+                                    @elem.Text
+                                </p>
+                            </div>
+                            <div class="coment-info">
+                                <p>@elem.Date.ToShortDateString()</p>
+                                <p>@elem.Author</p>
+                            </div>
+                        </li>
+                            }
+                        }
+                    }
+            </ul>
+
+        </div>
+        <div class="add-coment">
+            <h2>Добавить коментарий</h2>
+            <form action="./addcoment" method="post">
+                <input type="hidden" name="NewsId" value=@Model.Id />
+                <p>
+                    Author<br>
+                    <input type="text" name="Author" required>
+                </p>
+                <p>
+                     Text <br>
+                    <textarea name="Text" cols="80" rows="5"></textarea>
+                </p>
+                <p>
+                    <input type="submit" value="Отправить">
+                </p>
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>

@@ -31,6 +31,15 @@ namespace News_EF.Controllers
                 //$"Полученна строка {news.Id}\n{news.Title}\n{news.Text}\n{news.Author}\n{news.Date} ";
         }
 
+        [HttpPost]
+        [Route("home/addcoment")]
+        public string AddComent(int newsid,string Author,string Text)
+        {
+             //return servise.AddComent(newsid, Author,Text);
+            return $"Айди новости {newsid} Имя автора {Author} Текст коментария {Text} ";//RedirectToAction("read","home",new { id=newsid});
+            
+        }
+
         [HttpGet]
         [Route("home/read/{id:int?}")]
         public IActionResult Read(int id)
@@ -39,5 +48,7 @@ namespace News_EF.Controllers
             return View(news);
                 //$"{id}";
         }
+
+
     }
 }

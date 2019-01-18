@@ -10,6 +10,7 @@ namespace News_EF.Data
     public class NewsContext:DbContext
     {
         public DbSet<News> News { get; set; }
+        public DbSet<Comments> Coments { get; set; }
 
         public NewsContext(DbContextOptions<NewsContext> options):base(options)
         {
