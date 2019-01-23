@@ -19,8 +19,19 @@ namespace News_EF.Services
 
         public string AddComent(int NewsId, string auth,string text)
         {
+            var news = ndb.News.Where(x => x.Id == NewsId).Include(e => e.Coments).FirstOrDefault();
+            if(news!=null)
+            {
+                var com = new Comments { Author = auth, Text = text };
+                news.Coments.Add(com);
+                ndb.SaveChanges();
+                return $"Coment Added";
+            }
+            else
+            {
+                return $"Something wrong";
+            }
            
-            return $"Something wrong";
         }
 
         /// <summary>

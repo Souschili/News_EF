@@ -35,8 +35,8 @@ namespace News_EF.Controllers
         [Route("home/addcoment")]
         public string AddComent(int newsid,string Author,string Text)
         {
-             //return servise.AddComent(newsid, Author,Text);
-            return $"Айди новости {newsid} Имя автора {Author} Текст коментария {Text} ";//RedirectToAction("read","home",new { id=newsid});
+             return servise.AddComent(newsid, Author,Text);
+            //return $"Айди новости {newsid} Имя автора {Author} Текст коментария {Text} ";//RedirectToAction("read","home",new { id=newsid});
             
         }
 
