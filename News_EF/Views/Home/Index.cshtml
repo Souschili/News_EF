@@ -25,9 +25,9 @@
                    </a> 
                 </div>
                 <div class="news-info">
-                    <p>@item.Id</p>
+                    <p><a href="~/Home/DeleteNews/?id=@item.Id">Удалить новость</a></p>
                     <p>@item.Author</p>
-                    <p>@item.Date.ToShortDateString()</p>
+                    <p>@item.NewsDate.ToString()</p>
                 </div>
             </li>
         }

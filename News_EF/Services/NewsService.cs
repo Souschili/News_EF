@@ -17,36 +17,70 @@ namespace News_EF.Services
             ndb = context;
         }
 
-        public string AddComent(int NewsId, string auth,string text)
+        public async Task<bool> AddComent(int NewsId, string auth,string text)
         {
             var news = ndb.News.Where(x => x.Id == NewsId).Include(e => e.Coments).FirstOrDefault();
             if(news!=null)
             {
-                var com = new Comments { Author = auth, Text = text };
+                //если мы вытащили новость то пилим комент и добавляем
+                var com = new Comments
+                {
+                    Author = auth,
+                    Text = text
+                };
                 news.Coments.Add(com);
-                ndb.SaveChanges();
-                return $"Coment Added";
+               await ndb.SaveChangesAsync();
+               //цведомляем что запись прошла и новость существует
+                return true;
             }
-            else
-            {
-                return $"Something wrong";
-            }
-           
+
+            return false;
         }
 
         /// <summary>
         /// Добавить новость в БД
         /// </summary>
         /// <param name="news"></param>
-        public void AddNews(News news)
+        public async Task AddNewsAsync(News news)
         {
-            ndb.News.Add(news);
-            ndb.SaveChanges();
+           await ndb.AddAsync(news);
+           ndb.SaveChanges();
+        }
+        /// <summary>
+        /// Удалить коментарий в новости
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="newsid"></param>
+        /// <returns></returns>
+        public async Task DeleteComentAsync(int id)
+        {
+            //вытягиваем новость с коментами
+            var coment =await ndb.Coments.FirstOrDefaultAsync(x => x.Id == id);
+            if(coment!=null)
+            {
+                ndb.Coments.Remove(coment);
+                await ndb.SaveChangesAsync();
+            }
+            
         }
 
-        public void DeleteNews(int id)
+       
+
+        /// <summary>
+        /// Удаляем новость по айди
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DeleteNewsAsync(int id)
         {
-            throw new NotImplementedException();
+            //вытягиваем новость+коменты
+            var delnews = await ndb.News.Where(x => x.Id == id).Include(x => x.Coments).FirstOrDefaultAsync();
+            //удаляем новость каскадное удаление включенно по умолчанию так что просто удаляем 
+            if (delnews != null)
+            {
+                ndb.News.Remove(delnews);
+                await ndb.SaveChangesAsync();
+            }
         }
        /// <summary>
        /// Получить список всех новостей
@@ -63,9 +97,10 @@ namespace News_EF.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public News ShowNews(int id)
+        public async Task<News> ShowNewsAsync(int id)
         {
-            var read_news = ndb.News.FirstOrDefault(x => x.Id == id);
+            var read_news = await ndb.News.Where(x => x.Id == id)
+                           .Include(e => e.Coments).FirstOrDefaultAsync();
             return read_news;
         }
 

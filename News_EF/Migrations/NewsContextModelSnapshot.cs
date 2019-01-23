@@ -48,6 +48,8 @@ namespace News_EF.Migrations
 
                     b.Property<string>("Author");
 
+                    b.Property<DateTime>("NewsDate");
+
                     b.Property<string>("Text");
 
                     b.Property<string>("Title");

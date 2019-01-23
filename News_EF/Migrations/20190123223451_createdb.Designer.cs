@@ -10,8 +10,8 @@ using News_EF.Data;
 namespace News_EF.Migrations
 {
     [DbContext(typeof(NewsContext))]
-    [Migration("20190123003017_Newsdb")]
-    partial class Newsdb
+    [Migration("20190123223451_createdb")]
+    partial class createdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,8 @@ namespace News_EF.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Author");
+
+                    b.Property<DateTime>("NewsDate");
 
                     b.Property<string>("Text");
 

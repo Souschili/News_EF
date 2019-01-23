@@ -23,9 +23,9 @@ namespace News_EF.Controllers
 
         [HttpPost]
         [Route("home/add")]
-        public IActionResult Add(News news)
+        public async Task<IActionResult> AddAsync(News news)
         {
-            servise.AddNews(news);
+            await servise.AddNewsAsync(news);
 
             return new RedirectToActionResult("index", "home", null);
                 //$"Полученна строка {news.Id}\n{news.Title}\n{news.Text}\n{news.Author}\n{news.Date} ";
@@ -33,21 +33,44 @@ namespace News_EF.Controllers
 
         [HttpPost]
         [Route("home/addcoment")]
-        public string AddComent(int newsid,string Author,string Text)
+        public async Task<IActionResult> AddComent (int newsid,string Author,string Text)
         {
-             return servise.AddComent(newsid, Author,Text);
-            //return $"Айди новости {newsid} Имя автора {Author} Текст коментария {Text} ";//RedirectToAction("read","home",new { id=newsid});
-            
+            var status= await servise.AddComent(newsid, Author,Text);
+            //в зависимости от статуса перекидываем на нужную страницу
+
+            return new RedirectToActionResult("read", "home", new { id = newsid });
+            //return $"Айди новости {newsid} Имя автора {Author} Текст коментария {Text} ";//RedirectToAction("read","home",new { id=newsid});  
         }
 
         [HttpGet]
         [Route("home/read/{id:int?}")]
-        public IActionResult Read(int id)
+        public async Task<IActionResult> Read(int id)
         {
-             var news=servise.ShowNews(id);
-            return View(news);
-                //$"{id}";
+            var n = await servise.ShowNewsAsync(id);
+            return View(n);
+               
         }
+        [HttpGet]
+        [Route("home/deletenews/{id:int?}")]
+        public async Task<IActionResult> DeleteNews  (int id)
+        {
+            await servise.DeleteNewsAsync(id);
+            return new RedirectToActionResult("index", "home", null);
+        }
+
+        [HttpGet]
+        [Route("home/deletecoment")]
+        public async Task<IActionResult> DeleteComent(int id,int newsid)
+        {
+            await servise.DeleteComentAsync(id);
+            return new RedirectToActionResult("read", "home", new { id = newsid });
+            //return $"айди новости {newsid} айди комента {id}";
+        }
+        //public async Task<IActionResult> DeleteComent(int id,int newsid)
+        //{
+        //    await servise.DeleteNewsAsync(id);
+        //    return new RedirectToActionResult("index", "home", null);
+        //}
 
 
     }

@@ -14,8 +14,11 @@ namespace News_EF.Data
 
         public NewsContext(DbContextOptions<NewsContext> options):base(options)
         {
-            Database.EnsureCreated();
+           //Database.EnsureCreated();
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
     }
 }

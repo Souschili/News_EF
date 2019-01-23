@@ -11,9 +11,10 @@ namespace News_EF.Services
 
         //реализует CRUD операции,неважно какая БД
         Task<List<News>> GetNewsAsync();
-        void AddNews(News news);
-        News ShowNews(int id);
-        string AddComent(int NewsId, string auth,string text);
-        void DeleteNews(int id);
+        Task AddNewsAsync(News news);
+        Task<News> ShowNewsAsync(int id);
+        Task<bool> AddComent(int NewsId, string auth,string text);
+        Task DeleteNewsAsync(int id);
+        Task DeleteComentAsync(int id);
     }
 }

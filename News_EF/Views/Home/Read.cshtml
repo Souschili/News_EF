@@ -124,7 +124,7 @@
            @Model.Text
         </div>
         <div class="news-footer">
-            <p>Автор:@Model.Author</p> <br> <p>Дата:@Model.Date.ToShortDateString()</p>
+            <p>Автор:@Model.Author</p> <br> <p>Дата:@Model.NewsDate.ToString()</p>
         </div>
         <div class="coment-box">
             <ul class="coment">
@@ -145,8 +145,9 @@
                                 </p>
                             </div>
                             <div class="coment-info">
-                                <p>@elem.Date.ToShortDateString()</p>
-                                <p>@elem.Author</p>
+                                <p><a href="~/Home/DeleteComent/?id=@elem.Id&newsid=@Model.Id">Удалить коментарий</a></p>
+                                <p>Дата: @elem.Date.ToString()</p>
+                                <p>Автор: @elem.Author</p>
                             </div>
                         </li>
                             }
