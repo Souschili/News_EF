@@ -13,8 +13,8 @@ namespace News_EF.Services
         Task<List<News>> GetNewsAsync();
         Task AddNewsAsync(News news);
         Task<News> ShowNewsAsync(int id);
-        Task<bool> AddComent(int NewsId, string auth,string text);
-        Task DeleteNewsAsync(int id);
-        Task DeleteComentAsync(int id);
+        Task<bool> AddComentAsync(int NewsId, string auth,string text);
+        Task<bool> DeleteNewsAsync(int id);
+        Task<bool> DeleteComentAsync(int id);
     }
 }

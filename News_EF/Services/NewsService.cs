@@ -17,7 +17,7 @@ namespace News_EF.Services
             ndb = context;
         }
 
-        public async Task<bool> AddComent(int NewsId, string auth,string text)
+        public async Task<bool> AddComentAsync (int NewsId, string auth,string text)
         {
             var news = ndb.News.Where(x => x.Id == NewsId).Include(e => e.Coments).FirstOrDefault();
             if(news!=null)
@@ -52,7 +52,7 @@ namespace News_EF.Services
         /// <param name="id"></param>
         /// <param name="newsid"></param>
         /// <returns></returns>
-        public async Task DeleteComentAsync(int id)
+        public async Task<bool> DeleteComentAsync(int id)
         {
             //вытягиваем новость с коментами
             var coment =await ndb.Coments.FirstOrDefaultAsync(x => x.Id == id);
@@ -60,18 +60,16 @@ namespace News_EF.Services
             {
                 ndb.Coments.Remove(coment);
                 await ndb.SaveChangesAsync();
+                return true;
             }
-            
+            return false;
         }
-
-       
-
         /// <summary>
         /// Удаляем новость по айди
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task DeleteNewsAsync(int id)
+        public async Task<bool> DeleteNewsAsync(int id)
         {
             //вытягиваем новость+коменты
             var delnews = await ndb.News.Where(x => x.Id == id).Include(x => x.Coments).FirstOrDefaultAsync();
@@ -80,7 +78,9 @@ namespace News_EF.Services
             {
                 ndb.News.Remove(delnews);
                 await ndb.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
        /// <summary>
        /// Получить список всех новостей
@@ -91,7 +91,6 @@ namespace News_EF.Services
              
             return await ndb.News.ToListAsync();
         }
-
         /// <summary>
         /// Получить новость для чтения по айди
         /// </summary>
@@ -104,8 +103,5 @@ namespace News_EF.Services
             return read_news;
         }
 
-      
-
-       
     }
 }

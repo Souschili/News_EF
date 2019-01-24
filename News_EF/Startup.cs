@@ -35,6 +35,11 @@ namespace News_EF
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+            
             app.UseMvc();
             app.Run(async (context) =>
             {

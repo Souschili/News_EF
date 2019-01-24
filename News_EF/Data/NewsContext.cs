@@ -14,11 +14,12 @@ namespace News_EF.Data
 
         public NewsContext(DbContextOptions<NewsContext> options):base(options)
         {
+            //так как использую команды то это отключил 
            //Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            //хотел добавить каскадное удаление ,но как оказалось оно автоматом включенно
         }
     }
 }
